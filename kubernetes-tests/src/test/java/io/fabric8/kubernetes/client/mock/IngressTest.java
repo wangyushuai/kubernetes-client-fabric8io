@@ -122,8 +122,7 @@ public class IngressTest {
    server.expect().withPath("/apis/extensions/v1beta1/namespaces/ns1/ingresses/ingress2").andReturn(200, new IngressBuilder().build()).once();
 
     KubernetesClient client = server.getClient();
-
-    Boolean deleted = client.extensions().ingress().withName("ingress1").delete();
+    Boolean deleted = client.extensions().ingress().withName("ingress1").createOrReplace();
     assertTrue(deleted);
 
     deleted = client.extensions().ingress().withName("ingress2").delete();
